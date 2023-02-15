@@ -1,5 +1,7 @@
 const cloudinary=require("../../helpers/cloudinary");
 const Post=require('../models/post')
+const Comment= require('../models/comment');
+const { default: mongoose } = require("mongoose");
 //Create post
 const createPost=async(req,res)=>{
   try{
@@ -69,14 +71,47 @@ const getAllPost=async(req,res)=>{
       if (username) {
         posts = await Post.find({ username });
       } else {
-        posts = await Post.find();
+        posts = await Post.find().populate('comments');
       }
       res.status(200).json(posts);
     } catch (err) {
       res.status(500).json(err);
     }
 }
+const Likes=async(req,res)=>{
+   try {
+const post=await Post.findOne({_id:req.params.id})
+
+if(!post){
+  res.status(401).json({mssg:"no blog id in db" })
+}
+await Post.updateOne({_id:post.id},{
+  like:post.like+1
+})
+res.status(200).json({message:'Post liked'})
+    
+   } catch (error) {
+    res.status(500).json(error)
+   }
+}
+const unLikes=async(req,res)=>{
+  try {
+const post=await Post.findOne({_id:req.params.id})
+
+if(!post){
+ res.status(401).json({mssg:"no blog id in db" })
+}
+await Post.updateOne({_id:post.id},{
+ like:post.like-1
+})
+res.status(200).json({message:'Post unLiked'})
+   
+  } catch (error) {
+   res.status(500).json(error)
+  }
+}
+
 
 module.exports={
-    createPost,updatePost,getAllPost,getPost,deletePost
+    createPost,updatePost,getAllPost,getPost,deletePost,Likes,unLikes
 }

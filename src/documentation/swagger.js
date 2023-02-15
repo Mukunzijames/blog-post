@@ -2,6 +2,8 @@ const swaggerUi=require('swagger-ui-express');
 const swaggerJSDocs=require('swagger-jsdoc');
 const userRouteDocs=require('./user');
 const postRouteDocs=require('./post');
+const estateRouteDocs=require('./estate');
+const MessageRouteDocs=require('./contact')
 
 const options = {
   definition: {
@@ -36,7 +38,7 @@ const options = {
         },
       },
     },
-    paths: { ...userRouteDocs.userRouteDocs,...postRouteDocs.postRouteDocs},
+    paths: { ...userRouteDocs.userRouteDocs,...postRouteDocs.postRouteDocs,...estateRouteDocs.estateRouteDocs,...MessageRouteDocs.MessageRouteDocs},
   },
   apis: ['../routes/**/*.js'],
 };

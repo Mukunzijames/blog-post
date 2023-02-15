@@ -8,12 +8,20 @@ const PostSchema=new mongoose.Schema({
   },
   desc:{
    type:String,
-   required:true
   },
   image:{
     type:String,
     required:false
   },
+  like:{
+    type:Number,
+    default:0
+  },
+  comments:[{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Comment'
+  }]
+  
 },
 {timestamps:true}
 );

@@ -174,7 +174,109 @@ const updatePost = {
             }
         }
     }
+
 }
+const Likes={
+    tags:['Post'],
+    description:"likes post ",
+    parameters:[
+        {
+            name:"id",
+            in:"path",
+            description:"id of the post",
+            type:"string"
+        }
+    ],
+    responses:{
+        200:{
+            description:"OK",
+            content:{
+                "application/json":{
+                    type:"object",
+                    example:{
+                        status:"success",
+                        data:[]
+                    }
+                }
+            }
+        }
+    }
+
+}
+const unLikes={
+        tags:['Post'],
+        description:"unLikes post ",
+        parameters:[
+            {
+                name:"id",
+                in:"path",
+                description:"id of the post",
+                type:"string"
+            }
+        ],
+        responses:{
+            200:{
+                description:"OK",
+                content:{
+                    "application/json":{
+                        type:"object",
+                        example:{
+                            status:"success",
+                            data:[]
+                        }
+                    }
+                }
+            }
+        }
+    
+    }
+    const createcomment={
+        tags:['Post'],
+    description:"create comment",
+    security: [
+        {
+          token: [],
+        },
+    ],
+    parameters:[
+        {
+            name:"id",
+            in:"path",
+            description:"id of the post",
+            type:"string"
+        }
+    ],
+    requestBody:{
+        content:{
+            "application/json":{
+                schema:{
+                    type:"object",
+                    properties:{
+                        comment:{
+                            type:"string",
+                        }
+                       
+                    }
+                }
+            }
+        }
+    },
+    responses:{
+        200:{
+            description:"OK",
+            content:{
+                "application/json":{
+                    type:"object",
+                    example:{
+                        status:"success",
+                        data:[]
+                    }
+                }
+            }
+        }
+    }
+
+    }
 exports.postRouteDocs = {
     "/api/posts":{
         post:createPost
@@ -190,5 +292,15 @@ exports.postRouteDocs = {
     },
     "/api/posts/update/{id}":{
         patch:updatePost
-    }
+    },
+   "/api/posts/likes/{id}":{
+      post:Likes
+   },
+   "/api/posts/unlikes/{id}":{
+     post:unLikes
+   },
+   "/api/comments/create/{id}":{
+     post:createcomment
+   }
+   
 }
