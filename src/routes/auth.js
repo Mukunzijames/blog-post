@@ -18,6 +18,7 @@ const user= await User.create({
 
 res.status(200).json(user)
 }catch(e){
+    
 res.status(500).send(e)
 }
 })

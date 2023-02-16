@@ -19,7 +19,7 @@ const options = {
         description: 'Development server',
       },
       {
-        url: 'http://localhost:5000',
+        url: 'https://servapi-2191.onrender.com/',
         description: 'Production server',
       },
     ],
