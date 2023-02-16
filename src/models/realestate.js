@@ -15,11 +15,11 @@ const realestateschema= new mongoose.Schema({
      price:{
         type:String,
      },
-     Images:{
+     images:{
         type:Array,
         default:[]
      },
-     Beds:{
+     beds:{
         type:Number
      },
      bath:{
